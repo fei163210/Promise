@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Promise 封装AJAX操作</h2>
+      <button id="btn">点击发送 AJAX</button>
+    </div>
+    <script>
+      // 获取元素对象
+      // Document 对象使我们可以从脚本中对 HTML 页面中的所有元素进行访问
+      const btn = document.querySelector('#btn');
+      btn.addEventListener('click', () => {
+        // 创建Promise
+        const p = new Promise((resolve, reject) => {
+          // 创建对象
+          const xhr = new XMLHttpRequest();
+          // 初始化
+          xhr.open('GET', 'http://api.tianapi.com/mnpara/index?key=3541c4e148b445d1035f9e6be3bef016');
+          // 发送
+          xhr.send();
+          // 处理响应结果
+          xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4) {
+              // 2xx为成功
+              if (xhr.status >= 200 && xhr.status < 300) {
+                // 控制台输出响应体
+                resolve(xhr.response);
+              } else {
+                // 控制台输出响应状态码
+                reject(xhr.status);
+              }
+            }
+          };
+        });
+        // 调用p.then
+        p.then(
+          value => {
+            console.log(value);
+          },
+          reason => {
+            console.log(reason);
+          }
+        );
+      });
+    </script>
+  </body>
+</html>

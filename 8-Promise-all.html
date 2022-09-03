@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Promise API resolve</h2>
+    </div>
+    <script>
+      let p1 = Promise.resolve(123);
+      let p3 = Promise.resolve('hahah');
+      // 如果传入的是非Promise类型对象,则返回结果为成功的Promise对象
+      // 如果传入的是Promise对象,则参数的结果决定了resolve的结果
+      let p2 = Promise.resolve(
+        new Promise((resolve, reject) => {
+          reject('error');
+        })
+      );
+      p2.catch(reason => {});
+      const result = Promise.all([p1, p3]);
+      result.catch(reason => {});
+      console.log(result);
+    </script>
+  </body>
+</html>

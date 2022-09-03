@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // then的返回对象和async的返回规则一样
+      async function main() {
+        // 1.返回非Promise对象,状态为成功,结果为返回的值
+        // return 521;
+        // 2.返回Promise对象，状态为Promise的对象,结果为Promise的返回值
+        // return new Promise((reslove, reject) => {
+        //   reject('error');
+        // });
+        // 3.抛出异常
+        throw 'error';
+      }
+      let result = main();
+      console.log(result);
+    </script>
+  </body>
+</html>
